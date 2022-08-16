@@ -1,0 +1,3 @@
+pipelineOnPR:
+  bundle: 'test-bundle-2'
+  when: 'on-pr'
