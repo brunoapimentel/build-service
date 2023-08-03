@@ -14,9 +14,21 @@ spec:
       value: "{{revision}}"
     - name: output-image
       value: 'quay.io/redhat-appstudio/pull-request-builds:buildserv-{{revision}}'
+    - name: hermetic
+      value: "true"
+    - name: prefetch-input
+      value: "gomod"
   pipelineRef:
-    name: docker-build
-    bundle: quay.io/redhat-appstudio-tekton-catalog/pipeline-core-services-docker-build:latest
+    params:
+      - name: bundle
+        value: >-
+          quay.io/redhat-appstudio-tekton-catalog/pipeline-core-services-docker-build:latest
+      - name: name
+        value: docker-build
+      - name: kind
+        value: Pipeline
+    resolver: bundles
+
   workspaces:
     - name: workspace
       volumeClaimTemplate:
